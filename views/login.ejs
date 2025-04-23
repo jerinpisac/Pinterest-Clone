@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <div>
+        <h1>Login</h1>
+        <form action="/login" method="post">
+            <input type="text" name="username" placeholder="username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <% if(error.length != 0) {%>
+                <p>Username or Password is Incorrect</p>
+            <% } %>
+            <button type="submit">Login</button>
+        </form>
+        <div>
+            <h4>Don't have an account?</h4>
+            <a href="/register">Register</a>
+        </div>
+    </div>
+</body>
+</html>

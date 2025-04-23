@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a Post</title>
+</head>
+<body>
+    <div>
+        <h1>Create a Post</h1>
+        <form action="/upload/<%= id %>" method="post" enctype="multipart/form-data">
+            <input type="file" name="postimage" >
+            <input type="text" name="posttitle" placeholder="Title">
+            <textarea name="postdescription" placeholder="Description"></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

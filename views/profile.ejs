@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= user.fullname %></title>
+    <link rel="stylesheet" href="../stylesheets/profile.css">
+</head>
+<body>
+    <div>
+        <h1>Welcome to Pinterest, <%= user.fullname %></h1>
+        <h4>@ <%= user.username %></h4>
+        <a href="/logout">Log Out</a>
+        <a href="/addboard">Add a Board</a>
+    </div>
+    <div class="masonry-grid">
+        <% user.boards.forEach(function(board){ %>
+            <a href="/viewboard/<%= board._id %>" class="masonry-item">
+                <% if(board.posts.length > 0) {%>
+                    <img src="../images/uploads/<%= board.posts[0].postImage %>" alt="">
+                <% } else { %>
+                    <img src="../image.png" alt="">
+                <% } %>
+                <h4><%= board.boardName %></h4>
+            </a>
+        <% }) %>
+    </div>
+</body>
+</html>

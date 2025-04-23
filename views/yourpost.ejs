@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post</title>
+</head>
+<body>
+    <div>
+        <div>
+            <img src="../images/uploads/<%= post.postImage %>" alt="">
+        </div>
+        <div>
+            <h2>Title</h2>
+            <h3><%= post.postTitle %></h3>
+            <h2>Description</h2>
+            <h3><%= post.postDescription %></h3>
+            <div>
+                <label>No. of Pins: <%= post.pins %></label>
+            </div>
+            <a href="/viewboard/<%= post.board._id %>">Close</a>
+        </div>
+    </div>
+</body>
+</html>
