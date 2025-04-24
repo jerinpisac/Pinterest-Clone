@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boards</title>
+    <link rel="stylesheet" href="../stylesheets/profile.css">
+</head>
+<body>
+    <div class="masonry-grid">
+        <% if(user.boards.length > 0) { %>
+            <% user.boards.forEach(function(board){ %>
+                <a href="/viewboard/<%= board._id %>" class="masonry-item">
+                    <% if(board.posts.length > 0) {%>
+                        <img src="../images/uploads/<%= board.posts[0].postImage %>" alt="">
+                    <% } else { %>
+                        <img src="../image.png" alt="">
+                    <% } %>
+                    <h4><%= board.boardName %></h4>
+                </a>
+            <% }) %>
+        <% } else { %>
+            <h1>No Boards yet</h1>
+        <% } %>
+        <a href="/addboard">Add a Board</a>
+    </div>
+</body>
+</html>

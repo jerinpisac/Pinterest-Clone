@@ -26,6 +26,7 @@ const userSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Post'
     }],
+    dp: String,
     datecreated: {
         type: Date,
         default: Date.now()

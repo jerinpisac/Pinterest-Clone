@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saved Pins</title>
+    <link rel="stylesheet" href="../stylesheets/profile.css">
+</head>
+<body>
+    <div class="masonry-grid">
+        <% if(user.pins.length > 0) { %>
+            <% user.pins.forEach(function(pin){ %>
+                <a href="" class="masonry-item">
+                    <img src="../images/uploads/<%= pin.postImage %>" alt="">
+                    <h4><%= pin.postTitle %></h4>
+                    <h5>@<%= user.username %> - <%= pin.pins %> Pins</h5>
+                </a>
+            <% }) %>
+        <% } else { %>
+            <h1>No Pins Yet</h1>
+        <% } %>
+    </div>
+</body>
+</html>

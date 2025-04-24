@@ -23,6 +23,14 @@ router.get('/register', function (req, res){
 router.get('/profile', isLoggedIn, async function (req, res){
     let user = await userModel.findOne({
         username: req.session.passport.user
+    });
+  
+    res.render('profile', { user });
+})
+
+router.get('/boards', isLoggedIn, async function (req, res) {
+    const user = await userModel.findOne({
+        username: req.session.passport.user
     })
     .populate({
         path: 'boards',
@@ -30,8 +38,15 @@ router.get('/profile', isLoggedIn, async function (req, res){
           path: 'posts'
         }
       });
-  
-    res.render('profile', { user });
+    res.render('boards', { user });
+})
+
+router.get('/pins', isLoggedIn, async function (req, res) {
+    const user = await userModel.findOne({
+        username: req.session.passport.user
+    })
+    .populate('pins');
+    res.render('pins', { user });
 })
 
 router.get('/feed', isLoggedIn, async function (req, res){
@@ -79,6 +94,18 @@ router.get('/pin/:id', isLoggedIn, async function (req, res) {
     else    res.redirect(`/seepost/${id}`);
 })
 
+router.post('/uploaddp', upload.single('dp'), async function (req, res) {
+    if(!req.file){
+        return res.status(404).send("Error in uploading DP");
+    }
+    const user = await userModel.findOne({
+        username: req.session.passport.user
+    });
+    user.dp = req.file.filename;
+    await user.save();
+    res.redirect('/profile');
+})
+
 router.post('/upload/:id', isLoggedIn, upload.single('postimage'), async (req, res) => {
     if(!req.file){
         return res.status(404).send("Upload Failed");
@@ -110,7 +137,7 @@ router.get('/addboard', isLoggedIn, function(req, res){
 })
 
 router.get('/closeboard', isLoggedIn, function(req, res){
-    res.redirect('/profile');
+    res.redirect('/boards');
 })
 
 router.post('/createboard', isLoggedIn, async function (req, res){

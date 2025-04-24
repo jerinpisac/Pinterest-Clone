@@ -4,26 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= user.fullname %></title>
-    <link rel="stylesheet" href="../stylesheets/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <div>
-        <h1>Welcome to Pinterest, <%= user.fullname %></h1>
+        <h1>Welcome to your Profile</h1>
+        <img style="width: 100px; height: 100px; border-radius: 50%;" src="../images/uploads/<%= user.dp %>" alt="">
+        <i class="fa fa-pencil" id="dplink" style="cursor: pointer; color: black; width: 10px; height: 10px;"></i>
+        <form id="dpform" hidden action="/uploaddp" method="post" enctype="multipart/form-data">
+            <input type="file" name="dp" id="dp">
+            <button type="submit" id="dpbutton"></button>
+        </form>
+        <h3><%= user.fullname %></h3>
         <h4>@ <%= user.username %></h4>
         <a href="/logout">Log Out</a>
-        <a href="/addboard">Add a Board</a>
     </div>
-    <div class="masonry-grid">
-        <% user.boards.forEach(function(board){ %>
-            <a href="/viewboard/<%= board._id %>" class="masonry-item">
-                <% if(board.posts.length > 0) {%>
-                    <img src="../images/uploads/<%= board.posts[0].postImage %>" alt="">
-                <% } else { %>
-                    <img src="../image.png" alt="">
-                <% } %>
-                <h4><%= board.boardName %></h4>
-            </a>
-        <% }) %>
-    </div>
+    <a href="/boards">Created</a>
+    <a href="/pins">Saved Pins</a>
+    <script src="../javascripts/profile.js"></script>
 </body>
 </html>
