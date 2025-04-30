@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boards</title>
-    <link rel="stylesheet" href="../stylesheets/profile.css">
+    <link rel="stylesheet" href="../stylesheets/arrange.css">
 </head>
 <body>
+    <%- include('partials/header.ejs') %>
     <div class="masonry-grid">
         <% if(user.boards.length > 0) { %>
             <% user.boards.forEach(function(board){ %>

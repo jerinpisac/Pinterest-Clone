@@ -3,13 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pinterest</title>
+    <title> Pinterest</title>
+    <%- include('partials/logo.ejs') %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../stylesheets/style.css">
 </head>
 <body>
-    <div>
+    <div class="header">
         <h1>Pinterest</h1>
-        <a href="/register">Register</a>
-        <a href="/login">Login</a>
+        <div class="headername">
+            <a href="/register">Register</a>
+            <a href="/login">Login</a>
+        </div>
     </div>
+    <div class="indexbody">
+        <div class="leftpart">
+            <img src="../images/pinterest.png" alt="">
+        </div>
+        <div class="rightpart">
+            This is a Clone of the Pinterest Website. This is made using NodeJS and MongoDB. You can login 
+            and register using username and password. You can create boards and upload pins. You can save 
+            other's pins. You can view the feed, that is other's pins. But in this clone, you can't follow 
+            others or message others. 
+        </div>
+    </div>
+    <footer>
+        &copy; All Rights are reserved by Jerin
+    </footer>
 </body>
 </html>

@@ -94,7 +94,7 @@ router.get('/pin/:id', isLoggedIn, async function (req, res) {
     else    res.redirect(`/seepost/${id}`);
 })
 
-router.post('/uploaddp', upload.single('dp'), async function (req, res) {
+router.post('/uploaddp', isLoggedIn, upload.single('dp'), async function (req, res) {
     if(!req.file){
         return res.status(404).send("Error in uploading DP");
     }
@@ -150,7 +150,7 @@ router.post('/createboard', isLoggedIn, async function (req, res){
     });
     user.boards.push(board._id);
     await user.save();
-    res.redirect('/profile');
+    res.redirect(`/viewboard/${board._id}`);
 })
 
 router.get('/viewboard/:id', isLoggedIn, async function (req, res){
