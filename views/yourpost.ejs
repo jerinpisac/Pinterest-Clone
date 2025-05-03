@@ -4,21 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post</title>
+    <%- include('partials/logo.ejs') %> 
+    <link rel="stylesheet" href="../stylesheets/yourpost.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <div>
-        <div>
+    <div class="yourpostpage">
+        <% if(post.postImage.includes(".jpg")) { %>
             <img src="../images/uploads/<%= post.postImage %>" alt="">
-        </div>
-        <div>
-            <h2>Title</h2>
-            <h3><%= post.postTitle %></h3>
-            <h2>Description</h2>
-            <h3><%= post.postDescription %></h3>
-            <div>
+        <%} else { %>
+            <video src="../images/uploads/<%= post.postImage %>" controls="true"></video>
+        <% } %>
+        <div class="postdesc">
+            <a class="close" href="/viewboard/<%= post.board._id %>">
+                <i class="fa fa-close"></i>
+            </a> 
+            <div class="posttd">
+                <h4>Title</h4>
+                <h3><%= post.postTitle %></h3>
+                <h4>Description</h4>
+                <h3><%= post.postDescription %></h3>
+            </div>
+            <div class="label">
                 <label>No. of Pins: <%= post.pins %></label>
             </div>
-            <a href="/viewboard/<%= post.board._id %>">Close</a>
+            <a class="deletepost" href="/deletepost/<%= post._id %>">
+                <i class="fa fa-trash"></i>
+                <label>Delete</label>
+            </a>
         </div>
     </div>
 </body>

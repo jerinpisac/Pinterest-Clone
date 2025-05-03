@@ -1,0 +1,135 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.addpage{
+    margin-top: 60px;
+}
+
+.addheader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.addheader a{
+    margin-right: 50px;
+    text-decoration: none;
+    color: black;
+}
+
+.addheader i{
+    font-size: 30px;
+}
+
+.addpage h1{
+    margin-left: 50px;
+}
+
+.addpage form{
+    display: flex;
+    align-items: center;
+}
+
+.uploadbox{
+    width: 375px;
+    height:450px;
+    background-color: #e0e0d9;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: 300ms ease-in-out;
+}
+
+.uploadbox:hover{
+    background-color: darkgray;
+}
+
+.addpage form .uploadbox i{
+    color: black;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.uploadbox h5{
+    position: absolute;
+    bottom: 20px;
+    text-align: center;
+    margin: 0 30px 0 30px;
+}
+
+.addpage form .fileinput{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.addpage form .textinput{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.textinput .filetitle{
+    width: 80%;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 20px 10px 20px;
+    border-radius: 20px;
+}
+
+.textinput .filetitle label{
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.textinput .filetitle input{
+    border: none;
+    outline: none;
+    height: 30px;
+    font-size: 17px;
+}
+
+.filedes{
+    margin: 20px 0 10px 0;
+    font-weight: 600;
+}
+
+textarea{
+    width: 80%;
+    height: 100px;
+    font-size: 17px;
+    border-radius: 20px;
+    padding: 10px 0 0 20px;
+}
+
+button{
+    height: 50px;
+    width: 100px;
+    text-align: center;
+    margin-top: 30px;
+    margin-left: 30px;
+    border-radius: 10px;
+    border: 2px solid #cb2027;
+    outline: none;
+    background: #cb2027;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 300ms ease-in-out;
+}
+
+button:hover{
+    background: white;
+    color: #cb2027;
+}

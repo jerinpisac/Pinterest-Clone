@@ -4,18 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saved Pins</title>
-    <link rel="shortcut icon" href="../images/pinterest.png" type="image/x-icon">
+    <%- include('partials/logo.ejs') %>
     <link rel="stylesheet" href="../stylesheets/arrange.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <%- include('partials/header.ejs') %>
     <div class="masonry-grid">
         <% if(user.pins.length > 0) { %>
             <% user.pins.forEach(function(pin){ %>
-                <a href="" class="masonry-item">
-                    <img src="../images/uploads/<%= pin.postImage %>" alt="">
+                <a href="/seepost/<%= pin._id %>" class="masonry-item">
+                    <% if(pin.postImage.includes(".jpg")) { %>
+                        <img src="../images/uploads/<%= pin.postImage %>" alt="">
+                    <%} else { %>
+                        <video src="../images/uploads/<%= pin.postImage %>" controls="true"></video>
+                    <% } %>
                     <h4><%= pin.postTitle %></h4>
-                    <h5>@<%= user.username %> - <%= pin.pins %> Pins</h5>
+                    <h5>@ <%= pin.user.username %> - <%= pin.pins %> Pins</h5>
                 </a>
             <% }) %>
         <% } %>

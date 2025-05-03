@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="shortcut icon" href="../images/pinterest.png" type="image/x-icon">
+    <%- include('partials/logo.ejs') %>
     <link rel="stylesheet" href="../stylesheets/login.css">
 </head>
 <body>
@@ -14,7 +14,7 @@
             <input type="text" name="username" placeholder="Username" required>
             <input type="password" name="password" placeholder="Password" required>
             <% if(error.length != 0) {%>
-                <p style="color: red; margin-bottom: 5px;">Username or Password is Incorrect</p>
+                <p style="color: red; margin-bottom: 10px;">Username or Password is Incorrect</p>
             <% } %>
             <button type="submit">Login</button>
         </form>

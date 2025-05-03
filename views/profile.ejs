@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= user.fullname %></title>
-    <link rel="shortcut icon" href="../images/pinterest.png" type="image/x-icon">
+    <%- include('partials/logo.ejs') %>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../stylesheets/profile.css">
 </head>
@@ -13,7 +13,11 @@
     <div class="profpage">
         <h1>Welcome to your Profile</h1>
         <div class="dp">
-            <img src="../images/uploads/<%= user.dp %>" alt="">
+            <% if(user.dp !== undefined) { %>
+                <img src="../images/uploads/<%= user.dp %>" alt="">
+            <% } else { %>
+                <img src="../image.png" alt="">
+            <% } %>
             <i class="fa fa-pencil" id="dplink"></i>
         </div>
         <form id="dpform" hidden action="/uploaddp" method="post" enctype="multipart/form-data">

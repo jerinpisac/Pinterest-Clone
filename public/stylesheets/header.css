@@ -22,7 +22,7 @@
     margin-right: 20px;
 }
 
-a {
+.navmenu a {
     display: inline-block;
     padding: 10px 30px 10px 30px;
     text-decoration: none;
@@ -33,7 +33,7 @@ a {
     z-index: 0;
 }
 
-a::after{
+.navmenu a::after{
     content: '';
     width: 0;
     height: 100%;
@@ -45,6 +45,6 @@ a::after{
     transition: 300ms ease-in-out;
 }
 
-a:hover::after{
+.navmenu a:hover::after{
     width: 100%;
 }

@@ -1,0 +1,97 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.yourpostpage{
+    width: 800px;
+    height: 500px;
+    display: flex;
+    border-radius: 20px;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.yourpostpage img{
+    width: 50%;
+    height: auto;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+}
+
+.yourpostpage video{
+    width: 50%;
+    height: auto;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+}
+
+.postdesc{
+    margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.postdesc .close{
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 30px;
+    text-decoration: none;
+    color: black;
+}
+
+.postdesc .posttd{
+    margin-top: 70px;
+}
+
+.posttd h4{
+    margin-bottom: 5px;
+    color: darkgray;
+}
+
+.posttd h3{
+    font-weight: 100;
+    margin-bottom: 20px;
+}
+
+.label{
+    margin-top: 20px;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.deletepost{
+    position: absolute;
+    bottom: 30px;
+    right: 50px;
+    text-decoration: none;
+    background-color: red;
+    padding: 10px 20px 10px 20px;
+    border-radius: 10px;
+    color: white;
+    border: 2px solid red;
+    transition: 300ms ease-in-out;
+}
+
+.deletepost:hover{
+    background-color: white;
+    color: red;
+}
+
+.deletepost i{
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.deletepost label{
+    cursor: pointer;
+}

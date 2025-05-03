@@ -4,22 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post</title>
-</head>
+    <link rel="stylesheet" href="../stylesheets/seepost.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <%- include('partials/logo.ejs') %> 
+</head> 
 <body>
-    <div>
-        <div>
+    <div class="seepostpage">
+        <% if(post.postImage.includes(".jpg")) { %>
             <img src="../images/uploads/<%= post.postImage %>" alt="">
-        </div>
-        <div>
-            <h2>Title</h2>
-            <h3><%= post.postTitle %></h3>
-            <h2>Description</h2>
-            <h3><%= post.postDescription %></h3>
-            <a href="/pin/<%= post._id %>">Pin</a>
-            <div>
+        <%} else { %>
+            <video src="../images/uploads/<%= post.postImage %>" controls="true"></video>
+        <% } %>
+        <div class="postdesc">
+            <a class="close" href="/feed">
+                <i class="fa fa-close"></i>
+            </a> 
+            <div class="posttd">
+                <h4>Title</h4>
+                <h3><%= post.postTitle %></h3>
+                <h4>Description</h4>
+                <h3><%= post.postDescription %></h3>
+            </div>
+            <div class="label">
                 <label>No. of Pins: <%= post.pins %></label>
             </div>
-            <a href="/feed">Close</a>
+            <h3>By: @ <%= post.user.username %></h3>
+            <% if(!pin) { %>
+                <a href="/pin/<%= post._id %>" class="save">Pin</a>
+            <% } else { %>
+                <a href="/unpin/<%= post._id %>" class="unsave">Unpin</a>
+            <% } %>
         </div>
     </div>
 </body>

@@ -17,7 +17,7 @@ router.get('/login', function (req, res){
 })
 
 router.get('/register', function (req, res){
-    res.render('register');
+    res.render('register',{ error: "" });
 })
 
 router.get('/profile', isLoggedIn, async function (req, res){
@@ -45,7 +45,12 @@ router.get('/pins', isLoggedIn, async function (req, res) {
     const user = await userModel.findOne({
         username: req.session.passport.user
     })
-    .populate('pins');
+    .populate({
+        path: 'pins',
+        populate: {
+            path: 'user'
+        }
+    });
     res.render('pins', { user });
 })
 
@@ -67,8 +72,16 @@ router.get('/addpost/:id', isLoggedIn, function (req, res){
 
 router.get('/seepost/:id', isLoggedIn, async function (req, res) {
     const id = req.params.id;
-    const post = await postModel.findById(id);
-    res.render('seepost', { post });
+    const user = await userModel.findOne({
+        username: req.session.passport.user
+    })
+    const post = await postModel.findById(id).populate('user');
+    let pin = 0;
+    if(user.pins.includes(id))
+    {
+        pin = 1;
+    }
+    res.render('seepost', { post: post, pin: pin });
 })
 
 router.get('/yourpost/:id', isLoggedIn, async function (req, res) {
@@ -77,21 +90,65 @@ router.get('/yourpost/:id', isLoggedIn, async function (req, res) {
     res.render('yourpost', { post });
 })
 
+router.get('/deletepost/:id', isLoggedIn, async function (req, res) {
+    const id = req.params.id;
+
+    try {
+        const post = await postModel.findByIdAndDelete(id);
+        if (!post) {
+            return res.status(404).send('Post not found');
+        }
+
+        const board = await boardModel.findById(post.board);
+        if (board) {
+            board.posts = board.posts.filter(postId => postId.toString() !== id);
+            await board.save();
+        }
+
+        const user = await userModel.findById(post.user);
+        if (user) {
+            user.posts = user.posts.filter(postId => postId.toString() !== id);
+            await user.save();
+        }
+
+        res.redirect(`/viewboard/${post.board}`);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error deleting post');
+    }
+});
+
+
 router.get('/pin/:id', isLoggedIn, async function (req, res) {
     const id = req.params.id;
     const post = await postModel.findById(id);
-    if(post.pins == 0)  
-    {
-        post.pins = 1;
-        const user = await userModel.findOne({
-            username: req.session.passport.user
-        });
-        await post.save();
-        user.pins.push(id);
-        await user.save();
-        res.redirect(`/seepost/${id}`);
+    const user = await userModel.findOne({
+        username: req.session.passport.user
+    });
+
+    if (user.pins.includes(id)) {
+        return res.redirect(`/seepost/${id}`);
     }
-    else    res.redirect(`/seepost/${id}`);
+
+    post.pins += 1;
+    await post.save();
+    user.pins.push(id);
+    await user.save();
+    res.redirect(`/seepost/${id}`);
+})
+
+router.get('/unpin/:id', isLoggedIn, async function (req, res) {
+    const id = req.params.id;
+    const post = await postModel.findById(id);
+    const user = await userModel.findOne({
+        username: req.session.passport.user
+    });
+
+    post.pins -= 1;
+    await post.save();
+    user.pins = user.pins.filter(pinId => pinId.toString() !== id);
+    await user.save();
+    res.redirect(`/seepost/${id}`);
 })
 
 router.get('/editprofile', isLoggedIn, async function (req, res){
@@ -110,6 +167,10 @@ router.post('/editprofile', isLoggedIn, async function (req, res){
     user.email = req.body.email;
     await user.save();
     res.redirect('/login');
+})
+
+router.get('/closeeditpage', isLoggedIn, function (req, res){
+    res.redirect('/profile');
 })
 
 router.get('/deleteuser', isLoggedIn, async function (req, res){
@@ -207,20 +268,57 @@ router.get('/viewboard/:id', isLoggedIn, async function (req, res){
     res.render('viewboard', { boards: boards });
 })
 
-router.post('/register', function (req, res){
+router.get('/deleteboard/:id', isLoggedIn, async function (req, res) {
+    const id = req.params.id;
+
+    try {
+        const board = await boardModel.findByIdAndDelete(id);
+        if (!board) {
+            return res.status(404).send("Board not found");
+        }
+
+        const boardposts = board.posts;
+
+        for (let postId of boardposts) {
+            await postModel.findByIdAndDelete(postId);
+        }
+
+        const user = await userModel.findById(board.user);
+        if (user) {
+            user.boards = user.boards.filter(boardId => boardId.toString() !== id);
+            user.posts = user.posts.filter(postId => !boardposts.includes(postId.toString()));
+            await user.save();
+        } else {
+            console.log("User not found");
+        }
+
+        res.redirect('/boards');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Server error while deleting board");
+    }
+});
+
+
+router.post('/register', function (req, res) {
     const userData = new userModel({
         fullname: req.body.fullname,
         username: req.body.username,
         email: req.body.email
     });
 
-    userModel.register(userData, req.body.password)
-    .then(function(){
-        passport.authenticate("local")(req, res, function(){
+    userModel.register(userData, req.body.password, function (err, user) {
+        if (err) {
+            console.error('Registration error:', err.message);
+            return res.render('register', { error: err.message });
+        }
+
+        passport.authenticate("local")(req, res, function () {
             res.redirect('/profile');
-        })
-    })
-})
+        });
+    });
+});
+
 
 router.post('/login', passport.authenticate("local", {
     successRedirect: '/profile',

@@ -4,17 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add a Post</title>
+    <%- include('partials/logo.ejs') %>
+    <link rel="stylesheet" href="../stylesheets/addpost.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <div>
-        <h1>Create a Post</h1>
+    <div class="addpage">
+        <div class="addheader">
+            <h1>Create a Post</h1>
+            <a href="/viewboard/<%= id %>">
+                <i class="fa fa-close"></i>
+            </a>
+        </div>
         <form action="/upload/<%= id %>" method="post" enctype="multipart/form-data">
-            <input type="file" name="postimage" >
-            <input type="text" name="posttitle" placeholder="Title">
-            <textarea name="postdescription" placeholder="Description"></textarea>
-            <button type="submit">Submit</button>
+            <div class="fileinput">
+                <div class="uploadbox">
+                    <i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i>
+                    <h4>Upload your file here</h4>
+                    <h5>
+                        We recommend using high-quality .jpg files less than 20MB or .mp4 files
+                        less than 200MB
+                    </h5>
+                </div>
+            </div>
+            <div class="textinput">
+                <input class="uploadinput" hidden type="file" name="postimage">
+                <div class="filetitle">
+                    <label>Title</label>
+                    <input type="text" name="posttitle" placeholder="Add a Title">
+                </div>
+                <label class="filedes">Description</label>
+                <textarea name="postdescription" placeholder="Add a detailed description"></textarea>
+                <button type="submit">Post</button>
+            </div>
         </form>
-        <a href="/viewboard/<%= id %>">Close</a>
+        <script src="../javascripts/addpost.js"></script>
     </div>
 </body>
 </html>

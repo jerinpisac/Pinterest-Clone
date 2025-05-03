@@ -11,6 +11,11 @@
     <div class="regbody">
         <h1>Register</h1>
         <form action="/register" method="post">
+            <% if(error !== "") { %>
+                <script>
+                    alert("Error: <%= error %>");
+                </script>
+            <% } %>
             <input type="text" name="fullname" placeholder="Fullname">
             <input type="text" name="username" placeholder="Username">
             <input type="email" name="email" placeholder="Email">

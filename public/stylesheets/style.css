@@ -9,12 +9,24 @@ body{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #cb2027;
 }
 
-h1{
+.title{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title img{
   margin-left: 50px;
-  color: white;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.title h1{
+  color: #cb2027;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .headername{
@@ -58,7 +70,7 @@ a:hover {
   align-items: center;
 }
 
-img{
+.leftpart img{
   width: 250px;
   height: 250px;
   border-radius: 50%;

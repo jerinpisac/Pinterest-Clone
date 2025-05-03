@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boards</title>
-    <link rel="shortcut icon" href="../images/pinterest.png" type="image/x-icon">
+    <%- include('partials/logo.ejs') %>
     <link rel="stylesheet" href="../stylesheets/arrange.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -15,7 +15,11 @@
             <% user.boards.forEach(function(board){ %>
                 <a href="/viewboard/<%= board._id %>" class="masonry-item">
                     <% if(board.posts.length > 0) {%>
-                        <img src="../images/uploads/<%= board.posts[0].postImage %>" alt="">
+                        <% if(board.posts[0].postImage.includes(".mp4")) { %>
+                            <video src="../images/uploads/<%= board.posts[0].postImage %>" style="width: 100%; height: auto;"></video>
+                        <% } else { %>
+                            <img src="../images/uploads/<%= board.posts[0].postImage %>" alt="">
+                        <% } %>
                     <% } else { %>
                         <img src="../image.png" alt="">
                     <% } %>
