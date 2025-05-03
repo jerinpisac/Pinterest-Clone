@@ -27,18 +27,20 @@ A full-stack Pinterest-like application built with **Node.js**, **Express**, **M
 
 ##  Folder Structure
 
+```
 Pinterest-Clone/
-│
-├── routes/ # Express route handlers and also mongoose models (Mongoose Models should actually be in models folder)
-├── views/ # EJS templates
-├── public/
-| ├── images
-│ │ ├── uploads/ # Uploaded post files (I have removed the folder, so should first add the folder in images folder and then run)
-│ ├── stylesheets/ # CSS files
-│ └── javascripts/ # Frontend JS
-├── app.js # Main Express app
-└── package.json
+|
+|-- routes/ # Express route handlers and also mongoose models (Mongoose Models should actually be in models folder)
+|-- views/ # EJS templates
+|-- public/
+  |-- images
+    |-- uploads/ # Uploaded post files (I have removed the folder, so should first add the folder in images folder and then run)
+  |-- stylesheets/ # CSS files
+  |-- javascripts/ # Frontend JS
+|-- app.js # Main Express app
+|-- package.json
 
+```
 ---
 
 ##  Installation & Running Locally
@@ -53,9 +55,11 @@ Pinterest-Clone/
    npm install
 
 3. **Create a .env file**
+   ```ini
    MONGODB_URI=your mongodb connection string
 
 4. **Run the APP**
+   ```bash
    npx nodemon
 
 5. **Open in Browser**
@@ -72,5 +76,5 @@ Contributions, issues, and feature requests are welcome!
 Feel free to fork the repo and submit a pull request.
 
 ## Contact
-Made by Jerin P Isac
-Email: jerinpisac@gmail.com
+- Made by Jerin P Isac
+- Email: jerinpisac@gmail.com
