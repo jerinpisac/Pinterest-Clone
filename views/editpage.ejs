@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <%- include('partials/logo.ejs') %>
+    <link rel="stylesheet" href="../stylesheets/editpage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="regbody">
+        <a href="/profile">
+            <i class="fa fa-close"></i>
+        </a>
+        <h1>Edit Details</h1>
+        <form action="/editprofile" method="post">
+            <input type="text" name="fullname" value="<%= user.fullname %>" placeholder="Fullname" required>
+            <input type="text" name="username" value="<%= user.username %>" placeholder="Username" required>
+            <input type="email" name="email" value="<%= user.email %>" placeholder="Email" required>
+            <button type="submit">Edit Profile</button>
+        </form>        
+    </div>
+</body>
+</html>

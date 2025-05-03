@@ -4,14 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Board</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../stylesheets/board.css">
 </head>
 <body>
-    <div style="position: absolute; top: 50%; left: 50%; background-color: white;">
+    <div class="boardbody">
+        <a href="/closeboard">
+            <i class="fa fa-close"></i>
+        </a>
+        <h1>Create a New Board</h1>
         <form action="/createboard" method="post">
             <input type="text" placeholder="Enter the name of board" name="boardname">
             <button type="submit">Submit</button>
         </form>
-        <a href="/closeboard">Close</a>
     </div>
 </body>
 </html>

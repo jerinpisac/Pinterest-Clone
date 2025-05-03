@@ -7,13 +7,9 @@
     <link rel="stylesheet" href="../stylesheets/arrange.css">
 </head>
 <body>
-    <a href="/addpost/<%= boards._id %>">Add Post</a>
+    <%- include('partials/header.ejs') %>
     <div class="masonry-grid">
-        <% if(boards.posts.length == 0) { %>
-        <div>
-            No posts yet
-        </div>
-        <% } else { %>
+        <% if(boards.posts.length > 0) { %>
         <% boards.posts.forEach(function(post) { %>
             <a href="/yourpost/<%= post._id %>" class="masonry-item">
                 <img src="../images/uploads/<%= post.postImage %>" alt="">
@@ -21,6 +17,15 @@
             </a>
         <% })} %>
     </div>
-    <a href="/boards">Go back</a>
+        <% if(boards.posts.length == 0) { %>
+            <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 50px; margin-bottom: 50px;">
+                <img style="width: 200px; height: 200px;" class="noboard" src="../images/noposts.png" alt="">
+                <h2>No Posts yet</h2>
+            </div>
+        <% } %>
+    <div class="adddiv">
+        <a class="add" href="/addpost/<%= boards._id %>">Add Post</a>
+        <a class="goback" href="/boards">Go back</a>
+    </div>
 </body>
 </html>

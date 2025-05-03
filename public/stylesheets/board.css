@@ -11,7 +11,7 @@ body{
     min-height: 100vh;
 }
 
-.regbody{
+.boardbody{
     width: 400px;
     display: flex;
     flex-direction: column;
@@ -20,6 +20,7 @@ body{
     padding: 50px;
     border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    position: relative;
 }
 
 h1{
@@ -46,12 +47,6 @@ input{
 
 input:focus-within{
     border: 2px solid #cb2027;
-}
-
-.reglogin{
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 button{
@@ -89,13 +84,12 @@ button:hover{
     color: #cb2027;
 }
 
-a{
+a {
+    position: absolute;
+    top: 5%;
+    right: 5%;
     text-decoration: none;
-    color: mediumblue;
+    color: black;
     font-weight: 600;
-    margin-left: 5px;
-}
-
-a:hover{
-    text-decoration: underline;
+    font-size: 20px;
 }

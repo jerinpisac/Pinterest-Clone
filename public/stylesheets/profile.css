@@ -1,0 +1,68 @@
+.profpage {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.profpage h1{
+    font-size: 40px;
+    margin-top: 40px;
+}
+
+.dp{
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.dp img{
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    margin-top: 30px;
+}
+
+.dp i{
+    position: absolute;
+    top: 90%;
+    left: 90%;
+    cursor: pointer;
+}
+
+.edde {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.edit{
+    background-color: green;
+    border-radius: 10px;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.delete{
+    background-color: red;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.edde a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edde i{
+    margin-bottom: 3px;
+    margin-right: 5px;
+}
+
+label{
+    font-size: 15px;
+    color: white;
+    cursor: pointer;
+}

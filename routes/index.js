@@ -94,6 +94,49 @@ router.get('/pin/:id', isLoggedIn, async function (req, res) {
     else    res.redirect(`/seepost/${id}`);
 })
 
+router.get('/editprofile', isLoggedIn, async function (req, res){
+    let user = await userModel.findOne({
+        username: req.session.passport.user
+    });
+    res.render('editpage', { user });
+})
+
+router.post('/editprofile', isLoggedIn, async function (req, res){
+    let user = await userModel.findOne({
+        username: req.session.passport.user
+    });
+    user.fullname = req.body.fullname;
+    user.username = req.body.username;
+    user.email = req.body.email;
+    await user.save();
+    res.redirect('/login');
+})
+
+router.get('/deleteuser', isLoggedIn, async function (req, res){
+    let user = await userModel.findOneAndDelete({
+        username: req.session.passport.user
+    });
+    
+    if (user && user.boards.length > 0) {
+        for (let boardId of user.boards) {
+            await boardModel.findByIdAndDelete(boardId);
+        }
+    }
+
+    if (user && user.posts.length > 0) {
+        for (let postId of user.posts) {
+            await postModel.findByIdAndDelete(postId);
+        }
+    }
+
+    if (user && user.pins.length > 0) {
+        for (let pinId of user.pins) {
+            await postModel.findByIdAndDelete(pinId);
+        }
+    }
+    res.redirect('/');
+})
+
 router.post('/uploaddp', isLoggedIn, upload.single('dp'), async function (req, res) {
     if(!req.file){
         return res.status(404).send("Error in uploading DP");

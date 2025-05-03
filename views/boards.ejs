@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boards</title>
+    <link rel="shortcut icon" href="../images/pinterest.png" type="image/x-icon">
     <link rel="stylesheet" href="../stylesheets/arrange.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <%- include('partials/header.ejs') %>
@@ -17,13 +19,18 @@
                     <% } else { %>
                         <img src="../image.png" alt="">
                     <% } %>
-                    <h4><%= board.boardName %></h4>
+                    <h4><%= board.boardName %> - <%= board.posts.length %> Posts</h4>
                 </a>
             <% }) %>
-        <% } else { %>
-            <h1>No Boards yet</h1>
         <% } %>
-        <a href="/addboard">Add a Board</a>
     </div>
+        <% if(user.boards.length == 0) {%>
+                <div style="display: flex; justify-content: center; align-items: center; margin-top: 50px;">
+                    <img style="width: 400px; height: 300px;" class="noboard" src="../images/board.png" alt="">
+                </div>
+        <% } %>
+        <div class="adddiv">
+            <a class="add" href="/addboard"><i class="fa fa-plus"></i>Create Board</a>
+        </div>
 </body>
 </html>
